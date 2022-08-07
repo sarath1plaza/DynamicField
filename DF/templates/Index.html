@@ -6,29 +6,34 @@
 </head>
 
 <body>
-    <form method="POST" onsubmit="getAllValues()">
+    <form style="margin:50px" method="POST" onsubmit="getAllValues()">
         {% csrf_token %}
         <div>
-            <div>
-                <input type="text" id="name" , name="name">
-                <input type="text" id="subject", hidden name="subject">
+            <h1>Student Form</h1>
+            <div style="margin-bottom:20px">
+                <input type="text" placeholder="Enter your name" id="name" , name="name">
+                <input type="text" id="subject" , hidden name="subject">
             </div>
-            <button id="rowAdder" type="button">ADD NEW ROW</button>
-            <!-- <button type="button" onclick="getAllValues()">SUBMIT</button> -->
-            <button type="submit">SUBMIT</button>
-            <div id="row">
-                <input type="text">
+            <div style="margin-bottom:10px">
+                <button id="rowAdder" type="button">ADD NEW ROW</button>
+                <button type="submit">SUBMIT</button>
+            </div>
+
+            <!-- Dyanamic row section -->
+            <div id="row" style="margin-bottom:5px">
+                <input type="text" placeholder="Enter subject">
                 <button id="DeleteRow" type="button">Delete</button>
             </div>
             <div id="newinput"></div>
         </div>
     </form>
 
+    <!-- Script for create dynamic rows -->
     <script type="text/javascript">
         $("#rowAdder").click(function () {
             newRowAdd =
-                '<div id="row">' +
-                '<input type="text">' +
+                '<div style="margin-bottom: 5px" id="row">' +
+                '<input  placeholder="Enter subject"  type="text">' +
                 '<button id="DeleteRow" type="button">Delete</button> </div>';
             $('#newinput').append(newRowAdd);
         });
@@ -37,14 +42,15 @@
             $(this).parents("#row").remove();
         })
     </script>
+
+    <!-- Script for collect dynamic rows values -->
     <script>
         function getAllValues() {
             var allVal = '';
             $("#row > input").each(function () {
-                allVal += $(this).val()+',';
+                allVal += $(this).val() + ',';
             });
-            document.getElementById('subject').value=allVal
-            // alert(allVal);
+            document.getElementById('subject').value = allVal
         }
     </script>
 </body>

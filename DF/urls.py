@@ -5,6 +5,5 @@ from .views import *
 
 
 urlpatterns = [
-    # path('', views.Index)
     path('', StudentCreation.as_view())
 ]
