@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <form method="POST" onsubmit="getAllValues()">
+        {% csrf_token %}
+        <div>
+            <div>
+                <input type="text" id="name" , name="name">
+                <input type="text" id="subject", hidden name="subject">
+            </div>
+            <button id="rowAdder" type="button">ADD NEW ROW</button>
+            <!-- <button type="button" onclick="getAllValues()">SUBMIT</button> -->
+            <button type="submit">SUBMIT</button>
+            <div id="row">
+                <input type="text">
+                <button id="DeleteRow" type="button">Delete</button>
+            </div>
+            <div id="newinput"></div>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        $("#rowAdder").click(function () {
+            newRowAdd =
+                '<div id="row">' +
+                '<input type="text">' +
+                '<button id="DeleteRow" type="button">Delete</button> </div>';
+            $('#newinput').append(newRowAdd);
+        });
+
+        $("body").on("click", "#DeleteRow", function () {
+            $(this).parents("#row").remove();
+        })
+    </script>
+    <script>
+        function getAllValues() {
+            var allVal = '';
+            $("#row > input").each(function () {
+                allVal += $(this).val()+',';
+            });
+            document.getElementById('subject').value=allVal
+            // alert(allVal);
+        }
+    </script>
+</body>
+
+</html>
